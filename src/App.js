@@ -1,8 +1,10 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Wavesurf from './Wavesurf';
 
 function App() {
+  console.log('public url: ', process.env.PUBLIC_URL);
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +20,7 @@ function App() {
         >
           Learn React
         </a>
+        <Wavesurf src={process.env.PUBLIC_URL + 'Aisha.mp3'} />
       </header>
     </div>
   );
