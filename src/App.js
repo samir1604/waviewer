@@ -4,7 +4,6 @@ import './App.css';
 import Wavesurf from './Wavesurf';
 
 function App() {
-  console.log('public url: ', process.env.PUBLIC_URL);
   return (
     <div className="App">
       <header className="App-header">
@@ -20,7 +19,8 @@ function App() {
         >
           Learn React
         </a>
-        <Wavesurf src={process.env.PUBLIC_URL + 'Aisha.mp3'} />
+        <img src='logo192.png' alt='test' />
+        <Wavesurf src={'Aisha.mp3'} />
       </header>
     </div>
   );
