@@ -1,29 +1,20 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import Wavesurf from './Wavesurf';
+
+/* COMPONENTS */
+import Audios from './Components/Audios';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <img src='logo192.png' alt='test' />
-        <Wavesurf src={'Aisha.mp3'} />
-      </header>
-    </div>
-  );
+	return (
+		<div className="App">
+			<header className="App-header">
+				<h1>Audio Analizer</h1>
+			</header>
+			<div className="container">
+				<Audios />
+			</div>
+		</div>
+	);
 }
 
 export default App;
