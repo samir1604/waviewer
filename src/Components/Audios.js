@@ -23,7 +23,7 @@ class Audios extends Component {
 		const { audios } = this.state;
 
 		return (
-			<main className="content">
+			<main>
 				{audios.map(item => (
 					<article className="article" key={item.name}>
 						<Wavesurf

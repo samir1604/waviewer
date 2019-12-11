@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { Row, Col, Button, Spinner, Badge } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+	faPlay,
+	faPause,
+	faStop,
+	faClock,
+} from '@fortawesome/free-solid-svg-icons';
+import moment from 'moment';
 import WaveSurfer from 'wavesurfer.js';
 
 class Wavesurf extends Component {
 	constructor(props) {
 		super(props);
+
+		this.state = {
+			duration: 0,
+		};
+
 		this.playWave = this.playWave.bind(this);
 		this.pauseWave = this.pauseWave.bind(this);
 		this.stopWave = this.stopWave.bind(this);
@@ -40,15 +54,14 @@ class Wavesurf extends Component {
 		this.$el = ReactDOM.findDOMNode(this);
 		this.$waveform = this.$el.querySelector('.wave');
 
-		//this.showLoad(this.$waveform, true);
-
 		this.wavesurfer = WaveSurfer.create({
 			container: this.$waveform,
-			waveColor: 'blue',
-			progressColor: 'yellow',
+			waveColor: '#e77fe7',
+			progressColor: '#7d017d',
 		});
 
 		this.wavesurfer.on('ready', () => {
+			this.setState({ duration: this.wavesurfer.getDuration() });
 			this.hideLoading(this.$el);
 			this.$waveform.style = {
 				display: 'grid',
@@ -57,8 +70,7 @@ class Wavesurf extends Component {
 		});
 
 		this.wavesurfer.load(src);
-
-		//window.addEventListener('resize', this.handleResize.bind(this));
+		window.addEventListener('resize', this.handleResize.bind(this));
 	}
 
 	componentWillUnmount() {
@@ -67,27 +79,52 @@ class Wavesurf extends Component {
 
 	render() {
 		const { meta } = this.props;
+		const { name, size, created } = meta;
+		const { duration } = this.state;
+
 		return (
-			<div>
-				<div className="waveform">
-					<div className="loading">
-						<img
-							width="52"
-							height="52"
-							src="img/loading-86.gif"
-							alt="cargando"
-						/>
-					</div>
-					<div className="wave" style={{ display: 'none' }} />
-					<div className="buttons">
-						<button onClick={this.playWave}>Play</button>
-						<button onClick={this.pauseWave}>Pause</button>
-						<button onClick={this.stopWave}>Stop</button>
-					</div>
-					<div className="meta">
-						{meta.name}, {meta.size}, {meta.created}
-					</div>
-				</div>
+			<div className="article-container">
+				<Row>
+					<Col className="waveform">
+						<div className="loading">
+							<Spinner animation="grow" variant="danger" />
+						</div>
+						<div className="wave" style={{ display: 'none' }} />
+					</Col>
+				</Row>
+				<Row>
+					<Col>
+						<div className="buttonPanel">
+							<Button variant="success" onClick={this.playWave}>
+								<FontAwesomeIcon icon={faPlay} /> Play
+							</Button>
+							<Button variant="warning" onClick={this.pauseWave}>
+								<FontAwesomeIcon icon={faPause} /> Pause
+							</Button>
+							<Button variant="danger" onClick={this.stopWave}>
+								<FontAwesomeIcon icon={faStop} /> Stop
+							</Button>
+							<div className="meta-info">
+								<div>
+									<h5>
+										<Badge variant="secondary">
+											{name} | {`${Math.round(size / 1024)} Kb`} |{' '}
+											{moment(created).format('MM/DD/YYYY')}
+										</Badge>
+									</h5>
+								</div>
+								<div>
+									<h5>
+										<Badge variant="info">
+											<FontAwesomeIcon icon={faClock} /> {`${duration}s`}
+										</Badge>
+									</h5>
+								</div>
+							</div>
+						</div>
+					</Col>
+				</Row>
+				<hr />
 			</div>
 		);
 	}
