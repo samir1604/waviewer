@@ -39,9 +39,11 @@ class Wavesurf extends Component {
 	handleResize() {
 		const currentProgress =
 			this.wavesurfer.getCurrentTime() / this.wavesurfer.getDuration();
-		this.wavesurfer.empty();
-		this.wavesurfer.drawBuffer();
-		this.wavesurfer.seekTo(currentProgress);
+		if (currentProgress >= 0) {
+			this.wavesurfer.empty();
+			this.wavesurfer.drawBuffer();
+			this.wavesurfer.seekTo(currentProgress);
+		}
 	}
 
 	hideLoading($el) {
