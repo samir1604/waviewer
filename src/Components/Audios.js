@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Pagination from 'react-js-pagination';
 import Wavesurf from './Wavesurf';
 
+const URL_SITE = 'http://localhost:5000/waveserver/api';
+
 class Audios extends Component {
 	state = {
 		audios: [],
@@ -17,12 +19,12 @@ class Audios extends Component {
 	}
 
 	async fetchTotal() {
-		const total = await fetch('http://localhost:5000/total');
+		const total = await fetch(URL_SITE + '/total');
 		return await total.json();
 	}
 
 	async fetchData(pageNumber) {
-		const items = await fetch(`http://localhost:5000/${pageNumber}`);
+		const items = await fetch(`${URL_SITE}/page/${pageNumber}`);
 		return items.json();
 	}
 
@@ -58,10 +60,7 @@ class Audios extends Component {
 			<main>
 				{audios.map(item => (
 					<article className="article" key={item.name}>
-						<Wavesurf
-							meta={item}
-							src={'http://localhost:5000/audio/' + item.name}
-						/>
+						<Wavesurf meta={item} src={`${URL_SITE}/audio/${item.name}`} />
 					</article>
 				))}
 				<div className="pagination">
