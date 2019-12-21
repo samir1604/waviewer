@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Pagination from 'react-js-pagination';
+import * as env from '../enviroment';
 import Wavesurf from './Wavesurf';
 
-const URL_SITE = 'http://localhost:5000/waveserver/api';
+const { URL_SITE } = env[process.env.NODE_ENV];
 
 class Audios extends Component {
 	state = {
