@@ -11,6 +11,8 @@ import {
 import moment from 'moment';
 import WaveSurfer from 'wavesurfer.js';
 
+const KB = 1024;
+
 class Wavesurf extends Component {
 	constructor(props) {
 		super(props);
@@ -110,7 +112,7 @@ class Wavesurf extends Component {
 								<div>
 									<h5>
 										<Badge variant="secondary">
-											{name} | {`${Math.round(size / 1024)} Kb`} |{' '}
+											{name} | {`${Math.round(size / KB)} Kb`} |{' '}
 											{moment(created).format('MM/DD/YYYY')}
 										</Badge>
 									</h5>

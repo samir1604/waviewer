@@ -3,7 +3,7 @@ import Pagination from 'react-js-pagination';
 import * as env from '../enviroment';
 import Wavesurf from './Wavesurf';
 
-const { URL_SITE } = env[process.env.NODE_ENV];
+const { URL_SITE, ITEM_COUNT } = env[process.env.NODE_ENV];
 
 class Audios extends Component {
 	state = {
@@ -67,7 +67,7 @@ class Audios extends Component {
 				<div className="pagination">
 					<Pagination
 						activePage={activePage}
-						itemsCountPerPage={10}
+						itemsCountPerPage={ITEM_COUNT}
 						totalItemsCount={total}
 						pageRangeDisplayed={10}
 						itemClass="page-item"
