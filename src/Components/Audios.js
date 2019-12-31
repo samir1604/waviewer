@@ -27,7 +27,7 @@ class Audios extends Component {
 
 	async fetchData(pageNumber) {
 		const items = await fetch(
-			`${URL_SITE}/page/${pageNumber}&${ITEM_PER_PAGE}`
+			`${URL_SITE}/page?pag=${pageNumber}&items=${ITEM_PER_PAGE}`
 		);
 		return items.json();
 	}
