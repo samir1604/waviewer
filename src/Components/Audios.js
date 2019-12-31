@@ -4,6 +4,7 @@ import * as env from '../enviroment';
 import Wavesurf from './Wavesurf';
 
 const { URL_SITE, ITEM_COUNT } = env[process.env.NODE_ENV];
+const ITEM_PER_PAGE = parseInt(ITEM_COUNT);
 
 class Audios extends Component {
 	state = {
@@ -25,7 +26,9 @@ class Audios extends Component {
 	}
 
 	async fetchData(pageNumber) {
-		const items = await fetch(`${URL_SITE}/page/${pageNumber}`);
+		const items = await fetch(
+			`${URL_SITE}/page/${pageNumber}&${ITEM_PER_PAGE}`
+		);
 		return items.json();
 	}
 
@@ -67,7 +70,7 @@ class Audios extends Component {
 				<div className="pagination">
 					<Pagination
 						activePage={activePage}
-						itemsCountPerPage={ITEM_COUNT}
+						itemsCountPerPage={ITEM_PER_PAGE}
 						totalItemsCount={total}
 						pageRangeDisplayed={10}
 						itemClass="page-item"

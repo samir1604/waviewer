@@ -112,7 +112,7 @@ class Wavesurf extends Component {
 									<h5>
 										<Badge variant="secondary">
 											{name} | {`${Math.round(size / KB)} Kb`} |{' '}
-											{created.toLocaleString()}
+											{new Date(created).toLocaleDateString()}
 										</Badge>
 									</h5>
 								</div>
