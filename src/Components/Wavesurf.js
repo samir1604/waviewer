@@ -8,7 +8,6 @@ import {
 	faStop,
 	faClock,
 } from '@fortawesome/free-solid-svg-icons';
-import moment from 'moment';
 import WaveSurfer from 'wavesurfer.js';
 
 const KB = 1024;
@@ -113,7 +112,7 @@ class Wavesurf extends Component {
 									<h5>
 										<Badge variant="secondary">
 											{name} | {`${Math.round(size / KB)} Kb`} |{' '}
-											{moment(created).format('MM/DD/YYYY')}
+											{created.toLocaleString()}
 										</Badge>
 									</h5>
 								</div>
