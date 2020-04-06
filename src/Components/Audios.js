@@ -13,16 +13,17 @@ class Audios extends Component {
 		total: 0,
 	};
 
-	async updateTotal() {
-		const { total } = await this.fetchTotal();
-		if (total > 0) {
-			this.setState({ total });
-		}
+	async fetchTotal() {
+		const result = await fetch(URL_SITE + '/total');
+		return await result.json();
 	}
 
-	async fetchTotal() {
-		const total = await fetch(URL_SITE + '/total');
-		return await total.json();
+	async updateTotal() {
+		const { data, success } = await this.fetchTotal();
+		const { total } = data;
+		if (success && total > 0) {
+			this.setState({ total });
+		}
 	}
 
 	async fetchData(pageNumber) {
@@ -33,11 +34,11 @@ class Audios extends Component {
 	}
 
 	async pageChange(pageNumber) {
-		const audios = await this.fetchData(pageNumber);
-		if (audios.length > 0) {
+		const { data, success } = await this.fetchData(pageNumber);
+		if (success && data.audios.length > 0) {
 			this.setState({
 				activePage: pageNumber,
-				audios,
+				audios: data.audios,
 			});
 		} else {
 			this.setState({ activePage: pageNumber });
@@ -59,7 +60,6 @@ class Audios extends Component {
 
 	render() {
 		const { audios, activePage, total } = this.state;
-
 		return (
 			<main>
 				{audios.map(item => (
